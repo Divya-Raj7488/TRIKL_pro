@@ -10,11 +10,10 @@ export default function DisplayImg() {
   const [Data, setData] = useState([]);
   const [firstUrl, setFirstUrl] = useState("");
 
-  const RandomImg = async () => {
+  const randomImg = async () => {
     try {
-      const response = await axios.get("https://source.unsplash.com/random");
-      setFirstUrl(response);
-      console.log(response);
+      const randomImg = await axios.get("https://source.unsplash.com/random");
+      setFirstUrl(randomImg.config.url);
     } catch (err) {
       console.log(err);
     }
@@ -25,18 +24,18 @@ export default function DisplayImg() {
         "https://api.unsplash.com/photos/?client_id=pt9wXittIRNhegv4O1Zou61p4Cv4hDMUWlWKAVtSsVk"
       );
       const [urls] = response.data;
-      console.log(urls.urls);
       setFirstUrl(urls.urls.raw);
-      // setData(response.data);
-      // console.log(Data);
+      setData(response.data);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() =>{
+    randomImg();
+  },[])
   useEffect(() => {
     FetchData();
-    RandomImg();
   }, []);
 
   return (
@@ -70,7 +69,7 @@ export default function DisplayImg() {
                 ? "https://plus.unsplash.com/premium_photo-1673254848156-09d3822b5b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDR8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
                 : firstUrl
             }
-            alt=""
+            alt="hello there"
             style={{
               width: "100vw",
               height: "90vh",
