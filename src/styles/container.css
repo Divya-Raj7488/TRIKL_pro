@@ -1,4 +1,4 @@
-#root{
+#root {
   margin: 0;
   padding: 0;
   position: relative;
@@ -6,17 +6,46 @@
 }
 .imgContainer {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   padding-top: 0.5rem;
   display: flex;
   flex-direction: column;
 }
 .searchBoxContainer {
   width: 100vw;
-  height: 10vh;
+  min-height: 10vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toggleContainer {
+  width: 100vw;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  
+}
+.categorisedImage {
+  width: auto;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 0.7rem;
+}
+.hide {
+  width: 0vw;
+  height: 0vh;
+  overflow: hidden;
+}
+.searchBar {
+  display: flex;
+  flex-direction: row;
   align-items: center;
 }
 input {
@@ -34,7 +63,7 @@ input:focus {
   outline: none;
   border-radius: 0.5rem;
 }
-input::placeholder{
+input::placeholder {
   color: rgb(71, 68, 68);
 }
 .movingImg {
@@ -57,24 +86,23 @@ input::placeholder{
   font-size: 1.6rem;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: 500;
-  
 }
-.movingTextContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.movingTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-button{
-    width: 7rem;
-    height: 2.5rem;
-    border: 2px solid grey;
-    border-radius: 1rem;
-    background: rgba(122, 116, 116, 0.5);
-    margin: 0.5rem; 
-    font-size: 1rem;
-    font-family: 'Lucida Sans';
-    cursor: pointer;
-    position: relative;
-    z-index: 1;
+button {
+  width: 7rem;
+  height: 2.5rem;
+  border: 2px solid grey;
+  border-radius: 1rem;
+  background: rgba(122, 116, 116, 0.5);
+  margin: 0.5rem;
+  font-size: 1rem;
+  font-family: "Lucida Sans";
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
 }

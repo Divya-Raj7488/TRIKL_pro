@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import "../styles/container.css";
 import MovingText from "./movableBox";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowDown,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 export default function DisplayImg() {
   const [search, setSearch] = useState("");
   const [Data, setData] = useState([]);
   const [firstUrl, setFirstUrl] = useState("");
+  const [Toggle, setToggle] = useState(true);
 
   const randomImg = async () => {
     try {
@@ -21,46 +25,67 @@ export default function DisplayImg() {
   const FetchData = async () => {
     try {
       const response = await axios.get(
-        "https://api.unsplash.com/photos/?client_id=pt9wXittIRNhegv4O1Zou61p4Cv4hDMUWlWKAVtSsVk"
+        `https://api.unsplash.com/photos/?client_id=${process.env.REACT_APP_CLIENT_ID}`
       );
-      const [urls] = response.data;
-      setFirstUrl(urls.urls.raw);
       setData(response.data);
+      console.log(Data);
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() =>{
-    randomImg();
-  },[])
   useEffect(() => {
+    randomImg();
     FetchData();
   }, []);
 
   return (
     <div className="imgContainer">
-      {/* {Data &&
-        Data.map(({ urls }) => {
-          <> */}
-            <section className="searchBoxContainer">
-              <input type="text" value={search} />
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                style={{
-                  width: "1.6rem",
-                  height: "1.8rem",
-                  marginLeft: "-2.5rem",
-                  paddingLeft: "0.35rem",
-                  borderLeft: "2px solid grey",
-                }}
-                onClick={() => {
-                  setSearch(search);
-                }}
-              />
-            </section>
-          {/* </>;
-        })} */}
+      <section className="searchBoxContainer">
+        <div className="searchBar">
+          <input type="text" value={search} />
+          <FontAwesomeIcon
+            icon={faMagnifyingGlass}
+            style={{
+              width: "1.6rem",
+              height: "1.8rem",
+              marginLeft: "-2.5rem",
+              paddingLeft: "0.35rem",
+              borderLeft: "2px solid grey",
+            }}
+            onClick={() => {
+              setSearch(search);
+            }}
+          />
+          <FontAwesomeIcon
+            icon={faArrowDown}
+            style={{
+              width: "1.6rem",
+              height: "1.8rem",
+              marginLeft: "2.5rem",
+            }}
+            onClick={() => setToggle(!Toggle)}
+          />
+        </div>
+        <section className={Toggle ? "toggleContainer" : "hide"}>
+          {Data &&
+            Data.map((property) => {
+              return (
+                <div className="categorisedImage" key={property.id} onClick={() => setFirstUrl(property.urls.raw)}>
+                  <img
+                    src={property.urls.raw}
+                    width={200}
+                    height={150}
+                    style={{
+                      border: "1px solid grey",
+                      borderRadius: "1rem",
+                    }}
+                  />
+                </div>
+              );
+            })}
+        </section>
+      </section>
       <section>
         <div className="movingImg">
           <img
