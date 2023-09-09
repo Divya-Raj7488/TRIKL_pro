@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Draggable from "react-draggable";
 import "../styles/container.css";
 
@@ -19,7 +19,7 @@ export default function MovingText() {
           value={InputText}
           onChange={(e) => setInputText(e.target.value)}
           className="movingTextInputBox"
-          placeholder={InputText == "" ? "Enter your Text here" : InputText}
+          placeholder={InputText === "" ? "Enter your Text here" : InputText}
           onClick={() => setShowButton(true)}
         />
       </Draggable>

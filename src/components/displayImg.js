@@ -37,7 +37,7 @@ export default function DisplayImg() {
   useEffect(() => {
     randomImg();
     FetchData();
-  }, []);
+  });
 
   return (
     <div className="imgContainer">
@@ -80,6 +80,7 @@ export default function DisplayImg() {
                       border: "1px solid grey",
                       borderRadius: "1rem",
                     }}
+                    alt="random images"
                   />
                 </div>
               );
@@ -90,7 +91,7 @@ export default function DisplayImg() {
         <div className="movingImg">
           <img
             src={
-              firstUrl == ""
+              firstUrl === ""
                 ? "https://plus.unsplash.com/premium_photo-1673254848156-09d3822b5b52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxNDR8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
                 : firstUrl
             }
